@@ -1,0 +1,23 @@
+function y=EHD2019(P,xx,yy,a)
+n=size(P,1);
+P=[(-1).*P(:,1:xx),P(:,xx+1:xx+yy);];
+[max_P,index]=max(P,[],1);                 
+y_initial=P(index,:);
+A=size(y_initial,1);
+y_initial=[(-1).*y_initial(:,1:xx),y_initial(:,xx+1:xx+yy);]; 
+P(index,:)=[];
+n=size(P,1);
+m=size(P,2);
+Score_temp=zeros(n,m);
+for j=1:m
+    C=prctile(P(:,j),[0:1:100]);
+    for i=1:n
+        B(i,j)=sum(P(i,j)>=C);
+        end
+end
+Score=sum(B,2);
+Temp=[P,Score];
+Z=sortrows(Temp,xx+yy+1,'descend');
+y_second=Z(1:a-A,1:xx+yy);
+y_second=[(-1).*y_second(:,1:xx),y_second(:,xx+1:xx+yy);];
+y=[y_initial;y_second];
