@@ -1,0 +1,46 @@
+function E=twoD(P,xx,yy)  
+P=[(-1).*P(:,1:xx),P(:,xx+1:xx+yy);]; 
+n=size(P,1);                        
+nn=size(P,2);                        
+xx+yy==nn;                       %    Import the raw data matrix P 
+%  P is the [n*(xx+yy)] raw dataset, xx refers to the number of inputs, yy refers to the numbers of output  
+%  The first column must be the input
+A=(1:n)';
+PP=[P,A];                            
+E=[];
+ind_temp=(1:nn)';
+ind=nchoosek(ind_temp,2);
+i=size(ind,1);
+for k=1:i 
+            R=[P(:,ind(k,1)),P(:,ind(k,2)),A];     %      Initialization of the run set
+            XX=R(:,1);YY=R(:,2);
+            p=max(XX); 
+            index1=find(XX==p);  
+            RR=R(index1,:);
+            pp=max(RR(:,2));
+            L=[p,pp];                %       Initialization of the first efficient unit       
+            c1=ismember(R(:,1:2),L,'rows');
+            index2=find(c1==1);
+            E=[E;P(index2,:)];
+            index3=find(R(:,2)<=pp);
+            R(index3,:)=[];          %        Delete the units have smaller output
+        while  ~isempty(R)           %        Iteration    
+            K=(R(:,2)-pp)./(R(:,1)-p); 
+            KK=min(K);              
+            index4=find(K==KK);
+            r=R(index4,:);
+            p=min(r(:,1));indexA=find(r(:,1)==p);pp=r(indexA(1),2);     
+            I=[p,pp];
+            c2=ismember(R(:,1:2),I,'rows');
+            index6=find(c2==1);
+            EE=R(index6,3);
+            temp=ismember(PP(:,nn+1),EE);
+            index7=find(temp==1);
+            E=[E;P(index7,:)];
+            index8=find(R(:,2)<=pp);
+            R(index8,:)=[];
+        end
+end
+E=unique(E,'rows');      %   Delete the duplicate units
+E=[(-1).*E(:,1:xx),E(:,xx+1:xx+yy);]; 
+end
