@@ -8,7 +8,7 @@ function [output] = First_phase_twoD_Parallel(P, xx, yy) %  P refers to a n*(xx+
     X1 = twoD_subsample(:, 1:xx);
     Y1 = twoD_subsample(:, xx+1:xx+yy);
 
-    unsolvableOrNegativeK = [];
+    unsolvableOrPositiveK = [];
     optimalValues = zeros(1, nnn);
 
     parfor k = 1:nnn
@@ -23,17 +23,17 @@ function [output] = First_phase_twoD_Parallel(P, xx, yy) %  P refers to a n*(xx+
         try
             [sol, fval] = linprog(c, A, b, Aeq, beq, lb, ub);
             if fval > 1e-32
-                unsolvableOrNegativeK = [unsolvableOrNegativeK, k];
+                unsolvableOrPositiveK = [unsolvableOrPositiveK, k];
             end
             optimalValues(k) = fval;
         catch
-            unsolvableOrNegativeK = [unsolvableOrNegativeK, k];
+            unsolvableOrPositiveK = [unsolvableOrPositiveK, k];
         end
     end
 
-    if ~isempty(unsolvableOrNegativeK)
-        unsolvableOrNegativeK = unsolvableOrNegativeK';
-        exterior = P(unsolvableOrNegativeK, :);
+    if ~isempty(unsolvableOrPositiveK)
+        unsolvableOrPositiveK = unsolvableOrPositiveK';
+        exterior = P(unsolvableOrPositiveK, :);
         twoD_benchmark_temp = [twoD_subsample; exterior];
         score_E_benchmark_temp = input_orientedmodel(twoD_benchmark_temp, xx, yy);
         index_2 = find(score_E_benchmark_temp  > 0.9999999999999);
