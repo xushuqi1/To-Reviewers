@@ -1,5 +1,4 @@
 function [output] = First_phase_twoD_Parallel(P, xx, yy) %  P refers to a n*(xx+yy) matrix.
-% a=int(n^0.5)
 % The input-oriented model is used here.
 % To avoid the effect of the precision setting, the linear programming we use in determining the interior
 % points comes from Dula (2011)
