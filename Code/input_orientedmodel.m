@@ -3,7 +3,6 @@ function [output] = input_orientedmodel(P, xx, yy)
     Y = P(:, xx+1:xx+yy);
     n = size(X, 1);
 
-    % 初始化存储目标函数最优值的向量
     optimalValues = zeros(1, n);
 
     parfor k = 1:n
@@ -16,10 +15,8 @@ function [output] = input_orientedmodel(P, xx, yy)
         ub = [];
         op = optimoptions('linprog', 'display', 'none');
         
-        % 解决线性规划问题
         [sol, fval] = linprog(c, A, b, Aeq, beq, lb, ub, op);
 
-        % 收集目标函数的最优值
         optimalValues(k) = fval;
     end
 
