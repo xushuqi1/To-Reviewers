@@ -6,7 +6,7 @@ function [output] = input_orientedmodel(P, xx, yy)
     % 初始化存储目标函数最优值的向量
     optimalValues = zeros(1, n);
 
-    for k = 1:n
+    parfor k = 1:n
         c = [zeros(n, 1); 1];
         A = [X', -X(k, :)'; -Y', zeros(yy, 1)];
         b = [zeros(xx, 1); -Y(k, :)'];
