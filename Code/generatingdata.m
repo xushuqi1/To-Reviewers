@@ -1,5 +1,5 @@
-function [output]=generatingdata(n,xx,yy,A)       %  n refers to the number of DMU, 
-% xx refers to the number of inputs, yy refers to the number of outputs, A1
+function [output]=generatingdata(n,xx,yy,A)       %  n refers to the number of DMU
+% xx refers to the number of inputs, yy refers to the number of outputs
 % A refers to the density
 
 X=rand(n,xx)*1000;
