@@ -1,9 +1,9 @@
-function [output] = First_phase_twoD_Parallel(P, xx, yy) %  P refers to a n*(xx+yy) matrix.
-% The input-oriented model is used here.
+function [output] = Function_First_phase_twoD_Parallel(P, xx, yy) %  P refers to a n*(xx+yy) matrix.
+% The input-oriented model is used here.  
 
     
-    twoD_subsample = twoD(P, xx, yy);
-    n = size(twoD_subsample, 1);    
+    twoD_subsample = Function_twoD(P, xx, yy);
+    n = size(twoD_subsample, 1);      
     nnn = size(P, 1);
     X1 = twoD_subsample(:, 1:xx);
     Y1 = twoD_subsample(:, xx+1:xx+yy);
