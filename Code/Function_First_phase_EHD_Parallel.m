@@ -1,6 +1,4 @@
 function [output] = Function_First_phase_EHD_Parallel(P, xx, yy, a)        %  P refers to a n*(xx+yy) matrix.
-
-
 % a=int(n^0.5)  
 % The input-oriented model is used here.  
 
