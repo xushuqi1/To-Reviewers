@@ -1,8 +1,7 @@
 function [output] = First_phase_EHD_Parallel(P, xx, yy, a)        %  P refers to a n*(xx+yy) matrix.
 % a=int(n^0.5)
 % The input-oriented model is used here.
-% To avoid the effect of the precision setting, the linear programming we use in determining the interior
-% points comes from Dula (2011)
+
    
     E_EHD = EHD2019_initial_step(P, xx, yy, a);            
     score_E_EHD = input_orientedmodel(E_EHD, xx, yy);
