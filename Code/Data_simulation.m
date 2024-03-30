@@ -1,4 +1,4 @@
-function [output]=generatingdata(n,xx,yy,A)       %  n refers to the number of DMU
+function [output]=Data_simulation(n,xx,yy,A)       %  n refers to the number of DMU
 % xx refers to the number of inputs, yy refers to the number of outputs
 % A refers to the density
 
