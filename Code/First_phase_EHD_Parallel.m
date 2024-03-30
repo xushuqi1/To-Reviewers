@@ -3,7 +3,7 @@ function [output] = First_phase_EHD_Parallel(P, xx, yy, a)        %  P refers to
 % The input-oriented model is used here.
 
    
-    E_EHD = EHD2019_initial_step(P, xx, yy, a);            
+    E_EHD = Function_EHD2019_initial_step (P, xx, yy, a);            
     score_E_EHD = input_orientedmodel(E_EHD, xx, yy);
     index_1 = find(score_E_EHD > 0.9999999999999);
     EHD_subsample = E_EHD(index_1, :);
