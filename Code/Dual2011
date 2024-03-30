@@ -1,5 +1,5 @@
 function Efficient_set=Dula2011(P,xx,yy)
-P=[(-1).*P(:,1:xx),P(:,xx+1:xx+yy);];          %    Import the raw data matrix P and convert the input matrix to its negative form;
+P=[(-1).*P(:,1:xx),P(:,xx+1:xx+yy);];          
 %  P is the [n*(xx+yy)] matrix, xx refers to the number of inputs, yy refers to the numbers of output, each row corresponds to a DMU. 
 %  The first column of P must be the input variable
 
