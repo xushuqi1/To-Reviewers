@@ -1,3 +1,4 @@
+% This is the function code for generating data
 function [output]=Function_simulate_data(n,xx,yy,A)       %  n refers to the number of DMU
 % xx refers to the number of inputs, yy refers to the number of outputs
 % A refers to the density
