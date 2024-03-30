@@ -6,7 +6,8 @@ p = gcp;
 p.IdleTimeout = Inf;                                % Start parallel pool with maximum workers  
 
 P=Function_simulate_data(100000,8,8,0.5);
-xx=8;yy=8;                                          % Create a data matrix with specific density  
+xx=8;yy=8;                                          % Check it before run
+                                                    % Create a data matrix with specific density    
 
 a=size(P,1);
 a=a^0.5;
