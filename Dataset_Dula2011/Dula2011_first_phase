@@ -1,0 +1,43 @@
+function Efficient_set=Dula2011(P,xx,yy)
+P=[(-1).*P(:,1:xx),P(:,xx+1:xx+yy);];          
+%  P is the [n*(xx+yy)] matrix, xx refers to the number of inputs, yy refers to the numbers of output, each row corresponds to a DMU. 
+%  The first column of P must be the input variable
+
+n=size(P,1)
+nn=size(P,2);
+[max_P,index]=max(P,[],1);
+index1=index(:,1);
+M=P(index1,:)    
+F=[M];                                        %     Initialization of the efficient set
+R=P;
+[c1,iX1,index1]=intersect(F,R,'row');
+R(index1,:)=[];                               %     Initialization of the run set; 
+m=size(F,1);Xefficient=F(:,1:xx);Yefficient=F(:,xx+1:xx+yy);
+nnn=size(R,1);
+while ~isempty(R)
+        c2=[-R(1,:)';-1];
+        A2=[F,ones(m,1);ones(1,nn),0;];
+        b2=[zeros(m,1);1;];
+        Aeq2=[];
+        beq2=[];
+        lb2=[zeros(nn,1);-inf;];
+        ub2=[];
+        [xD,fvalD]=cplexlp(c2,A2,b2,Aeq2,beq2,lb2,ub2);
+    if -fvalD>1e-32                           %    Determine whether the current Point is outside
+        temp=[R*xD(1:nn)]+xD(end);
+        [~,ind]=max(temp);
+        temp=[];                              %    Clear vars in temp
+        M=R(ind,:);
+        F=[F;M];
+        m=size(F,1);Xefficient=F(:,1:xx);Yefficient=F(:,xx+1:xx+yy);
+        [c3,iX3,index3]=intersect(M,R,'row');
+        R(index3,:)=[];
+        nnn=size(R,1);
+    else
+        R(1,:)=[];
+        nnn=size(R,1);
+    end
+end
+F=[(-1).*F(:,1:xx),F(:,xx+1:xx+yy);];
+Efficient_set=F;  
+end
