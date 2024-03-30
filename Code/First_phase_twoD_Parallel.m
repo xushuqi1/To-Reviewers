@@ -1,7 +1,6 @@
 function [output] = First_phase_twoD_Parallel(P, xx, yy) %  P refers to a n*(xx+yy) matrix.
 % The input-oriented model is used here.
-% To avoid the effect of the precision setting, the linear programming we use in determining the interior
-% points comes from Dula (2011)
+
     
     twoD_subsample = twoD(P, xx, yy);
     n = size(twoD_subsample, 1);    
