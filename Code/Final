@@ -5,7 +5,7 @@ parpool(40)     
 p = gcp;                
 p.IdleTimeout = Inf;                                % Start parallel pool with maximum workers  
 
-P=simulate_data(100000,8,8,0.5);
+P=Function_simulate_data(100000,8,8,0.5);
 xx=8;yy=8;                                          % Create a data matrix with specific density  
 
 a=size(P,1);
