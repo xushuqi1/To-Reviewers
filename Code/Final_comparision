@@ -1,0 +1,22 @@
+clear;clc;
+parpool(40)   
+p = gcp;                
+p.IdleTimeout = Inf;      
+
+P=simulate_data(100000,8,8,0.5);
+xx=8;yy=8;                                          %  Create a data matrix with specific density  
+
+a=size(P,1);
+a=a^0.5;
+a=ceil(a);
+
+ 
+tic;                                                                       
+First_phase_EHD= First_phase_EHD_Parallel(P, xx, yy, a);                   
+elapsedTime_EHD = toc;                                                    % running EHD approach    
+
+
+tic;                                                                     
+First_phase_twoD= First_phase_twoD_Parallel(P, xx, yy);                   
+elapsedTime_twoD = toc;                                                    % running our approach 
+ 
