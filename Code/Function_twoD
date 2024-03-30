@@ -1,7 +1,7 @@
-function E=twoD(P,xx,yy)  
+function [output]=Function_twoD(P,xx,yy)  
 P=[(-1).*P(:,1:xx),P(:,xx+1:xx+yy);]; 
 n=size(P,1);                        
-nn=size(P,2);                        
+nn=size(P,2);                          
 xx+yy==nn;                                         %    Import the raw data matrix P 
 %  P is the [n*(xx+yy)] raw dataset, xx refers to the number of inputs, yy refers to the numbers of output  
 %  The first column must be the input
@@ -42,5 +42,5 @@ for k=1:i
         end
 end
 E=unique(E,'rows');                                 %   Delete the duplicate units
-E=[(-1).*E(:,1:xx),E(:,xx+1:xx+yy);]; 
+[output]=[(-1).*E(:,1:xx),E(:,xx+1:xx+yy);]; 
 end
