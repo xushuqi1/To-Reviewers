@@ -21,3 +21,4 @@ Z=sortrows(Temp,xx+yy+1,'descend');
 y_second=Z(1:a-A,1:xx+yy);
 y_second=[(-1).*y_second(:,1:xx),y_second(:,xx+1:xx+yy);];
 [output]=[y_initial;y_second];
+end
