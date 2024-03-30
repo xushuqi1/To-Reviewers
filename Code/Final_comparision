@@ -14,7 +14,7 @@ a=ceil(a);
 
  
 tic;                                                                       
-First_phase_EHD= First_phase_EHD_Parallel(P, xx, yy, a);                   
+First_phase_EHD= Function_First_phase_EHD_Parallel(P, xx, yy, a);                   
 elapsedTime_EHD = toc;                                                    % running EHD approach and record the time   
 
 
