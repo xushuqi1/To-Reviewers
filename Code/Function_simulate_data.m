@@ -24,7 +24,6 @@ random1=rand(1,yy);
 random1=random1.*0.5
 P(aa(k),xx+1:xx+yy)=P(aa(k),xx+1:xx+yy).*random1;
 r2 = randi(2,1,xx);
-r2 = r2;
 P(aa(k),1:xx)=P(aa(k),1:xx).*r2;
 end
 [output]=P;
