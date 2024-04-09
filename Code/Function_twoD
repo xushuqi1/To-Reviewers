@@ -1,10 +1,11 @@
-function [output]=Function_twoD(P,xx,yy)  
+function [output]=Function_twoD(P,xx,yy)           % This function is used to find two-dimensional projection-efficient units in DEA
+%    Import the raw data matrix P 
+%  P is the [n*(xx+yy)] raw dataset, xx refers to the number of inputs, yy refers to the numbers of output  
+%  The first column must be the input
 P=[(-1).*P(:,1:xx),P(:,xx+1:xx+yy);]; 
 n=size(P,1);                        
 nn=size(P,2);                          
-xx+yy==nn;                                         %    Import the raw data matrix P 
-%  P is the [n*(xx+yy)] raw dataset, xx refers to the number of inputs, yy refers to the numbers of output  
-%  The first column must be the input
+xx+yy==nn;                                        
 A=(1:n)';
 PP=[P,A];                            
 E=[];
