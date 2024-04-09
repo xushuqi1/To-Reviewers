@@ -1,4 +1,4 @@
-function P = Function_generatePositiveNormalMatrix(n, n1, n2)
+function P = Function_generatePositiveNormalMatrix(n, n1, n2)    %   generate data with normal distribution
     % Initialize the output matrix P
     P = zeros(n, n1 + n2);
     
