@@ -1,8 +1,7 @@
-function P = Function_generatePositiveNormalMatrix(n, n1, n2)    %   generate data with normal distribution
-    % Initialize the output matrix P
+function P = Function_generatePositiveNormalMatrix(n, n1, n2)    %   generate data with normal distribution, n refers to the numebr of DMUs, 
+% n1 refers to the number of inputs, n2 refers to the number of outputs
+   
     P = zeros(n, n1 + n2);
-    
-    % Parameters for the normal distribution
     mu = 1000;  % Mean
     sigma = sqrt(100);  % Standard deviation, since the variance is 100
 
