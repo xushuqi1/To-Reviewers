@@ -1,4 +1,4 @@
-function [output]=Function_EHD2019_initial_step(P,xx,yy,a)
+function [output]=Function_EHD2019_initial_step(P,xx,yy,a)        % a=int(n^0.5) 
 n=size(P,1);
 P=[(-1).*P(:,1:xx),P(:,xx+1:xx+yy);];
 [max_P,index]=max(P,[],1);                 
