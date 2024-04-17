@@ -1,4 +1,4 @@
-function [output] = First_phase_enhancedEHD_Parallel(P, xx, yy, a)              % a=int(n^0.5) 
+function [output] = Function_First_phase_enhancedEHD_Parallel(P, xx, yy, a)              % a=int(n^0.5) 
 
     E_EHD = Function_initial_step_enhanced_EHD (P, xx, yy, a);            
     score_E_EHD = input_orientedmodel(E_EHD, xx, yy);
