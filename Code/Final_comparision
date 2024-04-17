@@ -20,6 +20,6 @@ elapsedTime_EHD = toc;                                                    % runn
 
 
 tic;                                                                     
-First_phase_twoD= Function_First_phase_enhancedEHD_Parallel(P, xx, yy);                   
+First_phase_enhancedEHD= Function_First_phase_enhancedEHD_Parallel(P, xx, yy);                   
 elapsedTime_twoD = toc;                                                   % running our approach and record the time  
  
