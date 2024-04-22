@@ -7,7 +7,7 @@ p.IdleTimeout = Inf;                                % start parallel pool with m
 
 P= Function_generatePositiveNormalMatrix (100000,8,8);           % check it before run
 xx=8;yy=8;                                          % check it berfore run, xx refers to the number of inputs, yy refers to the number of outputs
-                                                    % create a data matrix with specific density    
+                                            
 
 a=size(P,1);
 a=a^0.5;
