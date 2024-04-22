@@ -5,7 +5,7 @@ parpool(25)     
 p = gcp;                
 p.IdleTimeout = Inf;                                % start parallel pool with maximum workers  
 
-P=Function_simulate_data(100000,8,8,0.5);           % check it before run, input number of DMUs, number of inputs, number of outputs, and density
+P= Function_generatePositiveNormalMatrix (100000,16);           % check it before run
 xx=8;yy=8;                                          % check it berfore run, xx refers to the number of inputs, yy refers to the number of outputs
                                                     % create a data matrix with specific density    
 
