@@ -4,7 +4,7 @@ function [output] = Function_First_phase_EHD_Parallel(P, xx, yy, a)        %  P 
 
    
     E_EHD = Function_EHD2019_initial_step (P, xx, yy, a);            
-    score_E_EHD = Function_input_orientedmodel(E_EHD, xx, yy);
+    score_E_EHD = Function_model(E_EHD, xx, yy);
     index_1 = find(score_E_EHD > 0.9999999999999);  
     EHD_subsample = E_EHD(index_1, :);  
 
@@ -40,7 +40,7 @@ function [output] = Function_First_phase_EHD_Parallel(P, xx, yy, a)        %  P 
         unsolvableOrPositiveK = unsolvableOrPositiveK';
         exterior = P(unsolvableOrPositiveK, :);
         EHD_benchmark_temp = [EHD_subsample; exterior];
-        score_E_benchmark_temp = Function_input_orientedmodel(EHD_benchmark_temp, xx, yy);
+        score_E_benchmark_temp = Function_model(EHD_benchmark_temp, xx, yy);
         index_2 = find(score_E_benchmark_temp > 0.9999999999999);
         EHD_benchmark = EHD_benchmark_temp(index_2, :);
         output = EHD_benchmark;
