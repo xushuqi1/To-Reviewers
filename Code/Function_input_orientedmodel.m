@@ -1,4 +1,4 @@
-function [output] = Function_input_orientedmodel(P, xx, yy)
+function [output] = Function_model(P, xx, yy)
     X = P(:, 1:xx);
     Y = P(:, xx+1:xx+yy);  
     n = size(X, 1);
