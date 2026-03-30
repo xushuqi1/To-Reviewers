@@ -1,4 +1,4 @@
-function L=model_ours(P,xx,yy,zz)
+function L=model(P,xx,yy,zz)
 n=size(P,1);
 X=P(:,1:xx);Y=P(:,xx+1:xx+yy);V=P(:,xx+yy+1:xx+yy+zz);
 nn1=size(X,2);nn2=size(Y,2);nn3=size(V,2);
