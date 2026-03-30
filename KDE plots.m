@@ -1,4 +1,4 @@
-function KDE plots(data, group_names)
+function KDE plots=(data, group_names)
 % Plot Kernel Density Estimation (KDE) for multiple groups of DEA efficiency values
 % (Supports boundaries at 0 and 1)
 % Input:
