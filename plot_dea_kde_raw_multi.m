@@ -1,19 +1,20 @@
 function plot_dea_kde_raw_multi(data, group_names)
-% 绘制多组 DEA 效率值的核密度图（支持边界0和1）
-% 输入：
-%   data        : 数值矩阵（每列一组数据）或元胞数组（每个元素为一组数据）
-%   group_names : 元胞数组，对应每组数据的名称（可选，默认生成 'Group 1','Group 2',...）
+% Plot Kernel Density Estimation (KDE) for multiple groups of DEA efficiency values
+% (Supports boundaries at 0 and 1)
+% Input:
+%    data        : Numerical matrix (one group per column) or cell array (one group per element)
+%    group_names : Cell array containing names for each data group (optional, defaults to 'Group 1', 'Group 2', ...)
 
-    % 统一将输入转换为元胞数组
+    % Standardize input to a cell array
     if isnumeric(data)
-        % 矩阵输入：每列一组数据
+        % Matrix input: each column is a data group
         nGroups = size(data, 2);
         data_cell = cell(1, nGroups);
         for i = 1:nGroups
             col = data(:, i);
-            col = col(~isnan(col) & ~isinf(col)); % 清理缺失值
+            col = col(~isnan(col) & ~isinf(col)); % Clean missing/infinite values
             if isempty(col)
-                error('第 %d 列数据为空，无法绘图。', i);
+                error('Data in column %d is empty, cannot plot.', i);
             end
             data_cell{i} = col;
         end
@@ -21,37 +22,37 @@ function plot_dea_kde_raw_multi(data, group_names)
         data_cell = data;
         nGroups = length(data_cell);
     else
-        error('data 必须是数值矩阵或元胞数组！');
+        error('Input "data" must be a numerical matrix or a cell array!');
     end
 
-    % 处理组名
+    % Handle group names
     if nargin < 2 || isempty(group_names)
         group_names = cell(1, nGroups);
         for i = 1:nGroups
             group_names{i} = sprintf('Group %d', i);
         end
     elseif length(group_names) ~= nGroups
-        error('组名数量与数据组数不一致！');
+        error('Number of group names does not match the number of data groups!');
     end
 
-    % 预处理所有数据（截断到 [0,1]）
+    % Pre-process all data (truncate to [0, 1])
     all_data = [];
     for i = 1:nGroups
-        data = data_cell{i};
-        % 强制截断到 [0,1]
-        data = max(min(data, 1), 0);
-        data_cell{i} = data;
-        all_data = [all_data; data];
+        group_data = data_cell{i};
+        % Force truncation to [0, 1]
+        group_data = max(min(group_data, 1), 0);
+        data_cell{i} = group_data;
+        all_data = [all_data; group_data];
     end
 
-    % 输出调试信息（每组的最小最大值）
-    fprintf('数据范围（截断后）：\n');
+    % Output debug info (min/max values for each group)
+    fprintf('Data range (after truncation):\n');
     for i = 1:nGroups
         fprintf('  %s : min = %.10f, max = %.10f\n', ...
                 group_names{i}, min(data_cell{i}), max(data_cell{i}));
     end
 
-    % 确定横轴范围（基于所有数据）
+    % Determine x-axis range based on all data
     data_max = max(all_data);
     if data_max > 1
         x_max = min(1.1, data_max + 0.05);
@@ -61,26 +62,26 @@ function plot_dea_kde_raw_multi(data, group_names)
     x_min = 0;
     x = linspace(x_min, x_max, 1000);
 
-    % 准备线型和颜色
+    % Prepare line styles and colors
     line_styles = {'-', '--', ':', '-.'};
     colors = lines(nGroups);
 
-    % 绘图
+    % Plotting
     figure;
     hold on;
     for i = 1:nGroups
-        data = data_cell{i};
+        group_data = data_cell{i};
 
-        % 为避免 ksdensity 边界检查失败，将等于 0 或 1 的值微调
+        % Adjust values exactly at 0 or 1 to avoid ksdensity support boundary issues
         eps_val = 1e-12;
-        data_adj = data;
+        data_adj = group_data;
         data_adj(data_adj == 0) = eps_val;
         data_adj(data_adj == 1) = 1 - eps_val;
 
-        % 核密度估计
+        % Kernel Density Estimation
         [f, xi] = ksdensity(data_adj, x, 'Support', [0, 1]);
 
-        % 选择线型（循环使用）
+        % Select line style (loop through available styles)
         style_idx = mod(i-1, length(line_styles)) + 1;
         line_style = line_styles{style_idx};
 
@@ -88,7 +89,7 @@ function plot_dea_kde_raw_multi(data, group_names)
              'Color', colors(i,:), 'DisplayName', group_names{i});
     end
 
-    % 图形装饰
+    % Figure decoration
     xlabel('Efficiency Score', 'FontSize', 12);
     ylabel('Density', 'FontSize', 12);
     legend('show', 'Location', 'best');
