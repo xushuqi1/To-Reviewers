@@ -1,6 +1,6 @@
 function [output] = data_generating_one_pollutinginput(n, c, s, scale_parameter) 
 % Input: sample size n, c is the correlation coefficient between outputs, 
-% s is the variance of the noise distribution, here we set it to zero. 
+% s is the variance of the noise distribution, here we set it to zero for simplicity. 
 % The last column of the output is the true efficiency score.
 
 X = 1 + 3 * rand(n, 4);                     % Generate an input matrix with a uniform distribution on [1,4]
