@@ -1,11 +1,8 @@
 function results = combined_models(P, xx, yy, zz, xx1)
-% COMBINED_MODELS integrates three DEA models and outputs the results of the three models
-%   results = combined_models(P, xx, yy, zz, xx1)
-%
 % Input:
 %   P   - Data matrix, column order: [X, Y, V], where X is the first group of inputs,
 %         Y is desirable outputs, V is undesirable outputs.
-%         X1 (the second group of inputs) is used in models 2 and 3, but the data is still
+%         X1 (the second group of inputs) is used in models 15 and 16, but the data is still
 %         included in the first xx columns of P; its number of columns needs to be
 %         specified separately as xx1.
 %   xx  - Number of columns for the first group of inputs X (corresponds to the first xx columns of P)
@@ -53,8 +50,6 @@ function results = combined_models(P, xx, yy, zz, xx1)
         beq_m1 = [X(k,:)'];
         lb_m1 = zeros(3*n+1, 1);
         ub_m1 = [inf*ones(3*n, 1); 0.999999999999];
-        
-        % Solve using cplexlp
         W_m1(:,k) = cplexlp(c_m1, A_m1, b_m1, Aeq_m1, beq_m1, lb_m1, ub_m1);
     end
     
